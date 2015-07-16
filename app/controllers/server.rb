@@ -31,7 +31,6 @@ module TrafficSpy
       end
     end
 
-
     post "/sources/:identifier/data" do |identifier|
 
       if not_registered?(identifier)
