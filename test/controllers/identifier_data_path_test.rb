@@ -11,7 +11,7 @@ class IdentifierDataPathTest < ControllerTest
   end
 
   def test_return_403_when_identifier_not_registered
-    post '/sources/identifier_not_in_database/data', 'who cares'
+    post '/sources/identifier_not_in_database/data', post_request_body
 
     assert_equal 403, last_response.status
     assert_equal 'Application Not Registered - 403 Forbidden', last_response.body
@@ -25,27 +25,27 @@ class IdentifierDataPathTest < ControllerTest
   end
 
   def test_url_is_saved_on_successful_request
-    post "/sources/#{registered_user_id}/data", @post_request_body
+    post "/sources/#{registered_user_id}/data", post_request_body
 
     assert_equal "http://jumpstartlab.com/blog", Url.all.first.url
   end
 
   def test_return_200_when_successful_request
-    post "/sources/#{registered_user_id}/data", @post_request_body
+    post "/sources/#{registered_user_id}/data", post_request_body
 
     assert_equal false, Payload.first[:payload_sha].nil?
   end
 
   def test_unique_payload_identifier_saved_on_good_request
-    post "/sources/#{registered_user_id}/data", @post_request_body
+    post "/sources/#{registered_user_id}/data", post_request_body
 
     assert_equal 200, last_response.status
     assert_equal "Success", last_response.body
   end
 
   def test_return_403_when_duplicate_payload
-    post "/sources/#{registered_user_id}/data", @post_request_body
-    post "/sources/#{registered_user_id}/data", @post_request_body
+    post "/sources/#{registered_user_id}/data", post_request_body
+    post "/sources/#{registered_user_id}/data", post_request_body
 
     assert_equal 403, last_response.status
     assert_equal "Already Received Request - 403 Forbidden", last_response.body
