@@ -94,7 +94,9 @@ module TrafficSpy
     end
 
     def snake_case(string)
-      Parser.convert(string)
+      string.split(/(?=[A-Z])/).map do |word|
+        word.downcase
+      end.join("_")
     end
 
     def pull_out_url_data(data)
