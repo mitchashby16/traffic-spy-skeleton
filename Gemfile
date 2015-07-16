@@ -7,6 +7,8 @@ gem 'sinatra-activerecord'
 gem 'rake'
 gem 'json'
 
+gem 'pry'
+
 group :development, :test do
   gem 'shotgun'
   gem 'minitest'
@@ -14,7 +16,6 @@ group :development, :test do
   gem 'capybara'
   gem 'launchy'
   gem 'rack-test'
-  gem 'pry'
   gem 'database_cleaner'
   gem 'guard'
   gem 'guard-rake'
