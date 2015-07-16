@@ -44,12 +44,7 @@ module TrafficSpy
         status 403
         body "Already Received Request - 403 Forbidden"
       else
-        parsed_payload = parse_payload(params)
-        registration   = Registration.find_by(identifier: identifier)
-        registration.urls.create(pull_out_url_data(parsed_payload))
-
-        payload = registration.payloads.last
-        payload.update(payload_sha: create_unique_payload_identifier(parsed_payload))
+        save_data(identifier, parse_payload(params))
 
         status 200
         body "Success"
@@ -109,6 +104,27 @@ module TrafficSpy
 
     def payload_sha(seed)
       Digest::SHA1.hexdigest(seed)
+    end
+
+    def save_data(identifier, parsed_payload)
+      save_url(identifier, parsed_payload)
+      save_payload_unique_identifier(identifier, parsed_payload)
+    end
+
+    def save_payload_unique_identifier(identifier, parsed_payload)
+      current_payload(identifier).update(payload_sha: create_unique_payload_identifier(parsed_payload))
+    end
+
+    def save_url(identifier, parsed_payload)
+      current_registration(identifier).urls.create(pull_out_url_data(parsed_payload))
+    end
+
+    def current_registration(identifier)
+      Registration.find_by(identifier: identifier)
+    end
+
+    def current_payload(identifier)
+      current_registration(identifier).payloads.last
     end
 
   end
