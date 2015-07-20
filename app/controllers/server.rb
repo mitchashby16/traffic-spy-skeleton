@@ -86,6 +86,7 @@ module TrafficSpy
                             .group(:requested_at)
                             .order('requested_at asc')
                             .count('requested_at')
+
         erb :event
       end
 
