@@ -51,7 +51,6 @@ class EventsDataTest < FeatureTest
   end
 
   def test_user_sees_message_when_no_events_to_display
-    message = "No Events to Display"
     visit @path
 
     assert page.has_content?("No Events to Display")
