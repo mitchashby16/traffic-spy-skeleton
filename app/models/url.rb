@@ -1,6 +1,8 @@
 require 'uri'
 class Url < ActiveRecord::Base
   has_many :payloads
+  has_many :browsers, through: :payloads
+  has_many :operating_systems, through: :payloads
 
 
 

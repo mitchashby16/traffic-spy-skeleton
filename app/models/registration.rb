@@ -3,6 +3,7 @@ class Registration < ActiveRecord::Base
   has_many :payloads
   has_many :events, through: :payloads
   has_many :urls, through: :payloads
+  has_many :browsers, through: :payloads
 
   def screen_resolutions
     payloads.group(:screen_resolution).count

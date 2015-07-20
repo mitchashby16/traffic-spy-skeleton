@@ -40,14 +40,21 @@ class UrlsStatisticsCalculator
 
   def get_user_agents
     agents = all_urls.map do |url|
-      url.user_agents.each do |agents|
-        begin
-          agents.each_with_object(Hash.new(0)) { |agent,counts| counts[agent[:name]] += 1 }
-        rescue
-          nil
-        end
-      end
+
+      [{url[:url]=>""},{url.browsers=>url.browsers.count},{url.operating_systems=>url.operating_systems.count}]
+      # {url[:url] => [url.browsers,url.browsers.count,url.operating_systems,url.operating_systems.count]}
+
+
+      # url.user_agents.each do |agents|
+      #   begin
+      #     agents.each_with_object(Hash.new(0)) { |agent,counts| counts[agent[:name]] += 1 }
+      #   rescue
+      #     nil
+      #   end
+      # end
+
     end
+
   end
 
 end

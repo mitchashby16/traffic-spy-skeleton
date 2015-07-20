@@ -3,6 +3,7 @@
 <% if @url %>
 <%calculator = UrlsStatisticsCalculator.new(@url)%>
 <ul>
+  <caption>URL Specific Statistics</caption>
   <li><strong>Longest Response Time: </strong>
     <%=calculator.find_longest_response_time%></li>
   <li><strong>Shortest Response Time: </strong>
@@ -13,8 +14,20 @@
       <%=calculator.get_http_verbs%></li>
   <li><strong>Most Popular Referrals: </strong>
       <%=calculator.get_referred_by%></li>
-  <!-- <li><strong>Most Popular User Agents: </strong>
-      <%=calculator.get_user_agents%></li> -->
+  <li><strong>Most Popular User Agents: </strong></li>
+  <!-- <%=calculator.get_user_agents%> -->
+  <!-- <li><%@user_agents.map do ||%></li>
+
+
+<%end%> -->
+      <!-- <%@browsers.map do |browser, num|%>
+      <li><%=browser[:name]%></li>
+      <li><%=num%></li>
+      <%end%>
+      <%@os.map do |os, num|%>
+      <li><%=os[:name]%></li>
+      <li><%=num%></li> -->
 
     <%end%>
+        <%end%>
 </ul>

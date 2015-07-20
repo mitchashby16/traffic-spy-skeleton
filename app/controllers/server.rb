@@ -52,6 +52,10 @@ module TrafficSpy
       urls_handler = UrlStatisticsHandler.new(identifier, path)
       @url = urls_handler.url
       @message = urls_handler.message
+      ua = UrlsStatisticsCalculator.new(@url)
+      @user_agents = ua.get_user_agents
+
+
       erb urls_handler.erb
     end
 

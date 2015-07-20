@@ -35,7 +35,6 @@ class UrlStatisticsHandler
   end
 
   def find_url(registration)
-    # binding.pry
     urls         = registration.urls.select{|url, count| url != nil}
     urls.find {|url, count| url.path == "/#{path}" }
   end
